@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <aside class="sidebar">
+        <h1>Dashboard</h1>
+        <ul class="nav-links">
+            <li><a href="{% url 'dashboard:dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+            <li><a href="{% url 'users:user_list' %}" class="{% if request.resolver_match.url_name == 'user_list' %}active{% endif %}">Users</a></li>
+            <li><a href="{% url 'partner:partner_list' %}" class="{% if request.resolver_match.url_name == 'partner_list' %}active{% endif %}">Partners</a></li>
+        </ul>
+    </aside>
+    
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

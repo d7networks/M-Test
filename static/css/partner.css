@@ -1,0 +1,23 @@
+/* Partner-specific button styles */
+.partner-btn {
+    padding: 0.45rem 1.1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+.partner-btn-edit {
+    color: #3182ce;
+}
+.partner-btn-edit:hover {
+    color: #2563eb;
+}
+.partner-btn-delete {
+    color: #e53e3e;
+}
+.partner-btn-delete:hover {
+    color: #b91c1c;
+}

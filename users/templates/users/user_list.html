@@ -1,0 +1,61 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}User List{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>All Users</h2>
+    </div>
+    <div class="card-body">
+        {% if users %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Status</th>
+                    <th>Staff</th>
+                    <th>Joined</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td><strong>{{ user.username }}</strong></td>
+                    <td>{{ user.email|default:"—" }}</td>
+                    <td>{{ user.first_name|default:"—" }}</td>
+                    <td>{{ user.last_name|default:"—" }}</td>
+                    <td>
+                        {% if user.is_active %}
+                            <span class="badge success">Active</span>
+                        {% else %}
+                            <span class="badge danger">Inactive</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user.is_staff %}
+                            <span class="badge info">Staff</span>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                    <td>{{ user.date_joined|date:"M d, Y" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <h3>No users found</h3>
+            <p>There are no users in the system yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

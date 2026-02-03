@@ -1,0 +1,58 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}Partner List{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/partner.css' %}">
+<div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Partner List</h2>
+        <a href="{% url 'partner:partner_create' %}" class="partner-btn partner-btn-edit">+ New Partner</a>
+    </div>
+    <div class="card-body">
+        {% if partners %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Account Type</th>
+                    <th>Company URL</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for partner in partners %}
+                <tr>
+                    <td>{{ partner.company_name }}</td>
+                    <td>{{ partner.email }}</td>
+                    <td>{{ partner.phone }}</td>
+                    <td>{{ partner.get_account_type_display }}</td>
+                    <td>
+                        {% if partner.company_url %}
+                        <a href="{{ partner.company_url }}" target="_blank">{{ partner.company_url }}</a>
+                        {% else %}-{% endif %}
+                    </td>
+                    <td>{{ partner.address|default:"-" }}</td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{% url 'partner:partner_edit' partner.pk %}" class="partner-btn partner-btn-edit">Edit</a>
+                            <a href="{% url 'partner:partner_delete' partner.pk %}" class="partner-btn partner-btn-delete">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2a4 4 0 004 4h2a4 4 0 004-4zm6-4a4 4 0 00-4-4V5a4 4 0 014-4h2a4 4 0 014 4v2a4 4 0 01-4 4z"/></svg>
+            No partners found.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
