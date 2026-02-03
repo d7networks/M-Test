@@ -61,10 +61,6 @@ Visit [http://localhost/](http://localhost/) in your browser.
 ### 7. Access the Admin Panel
 Go to [http://localhost/admin/](http://localhost/admin/) and log in with your superuser credentials.
 
-## Features
-- Responsive dashboard layout
-- User and partner management (CRUD)
-- Styled with custom CSS
 
 ## Notes
 - Static files are in `static/`
