@@ -12,7 +12,7 @@ This is a Django-based admin dashboard project with user and partner management.
 ### 1. Clone the Repository
 ```
 git clone <your-repo-url>
-cd d7_admin
+cd M-Test
 ```
 
 ### 2. Create and Activate Virtual Environment
