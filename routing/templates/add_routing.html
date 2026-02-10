@@ -1,0 +1,116 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}Partner List{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/routing.css' %}">
+
+<div class="container-fluid">
+    <form action="{% url 'routing:AddRoutingView' %}", method="POST" class="row justify-content-center">
+        <div class="col-4"></div>
+        <div class="routing-select col-4 mb-5">
+            {% csrf_token %}
+            <select id="parner" name="partner" class="form-select" aria-label="Select Partner" onchange="this.form.submit()">
+                {% if not partner_id %}
+                <option  selected value="">Chose partner</option>
+                {% for partner in partners %}
+                    <option value="{{partner.id}}">{{ partner.company_name }}</option>
+                {% endfor %}
+                {% else %}
+                {% for partner in partners %}
+                {% if partner_id == partner.id %}
+                    <option selected value="{{partner.id}}">{{ partner.company_name }}</option>
+                {% else %}
+                    <option value="{{partner.id}}">{{ partner.company_name }}</option>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4 mb-5">
+            <select name="client" class="form-select" aria-label="Select Client" onchange="">
+                <option value="">Choose Client</option>
+                {% for client in clients %}
+                    {% if client_id == client.id %}
+                        <option selected value="{{client.id}}">{{ client.name }}</option>
+                    {% else %}
+                        <option value="{{client.id}}">{{ client.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4 mb-5">
+            {% csrf_token %}
+            <select name="country" class="form-select" onchange="this.form.submit()" aria-label="Select Country" onchange="">
+                <option value="">Choose Country</option>
+                {% for country in countries %}
+                    {% if country_id == country.id %}
+                        <option selected value="{{country.id}}">{{ country.name }}</option>
+                    {% else %}
+                        <option value="{{country.id}}">{{ country.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4 mb-5">
+            <select name="network" class="form-select" aria-label="Select Network" onchange="">
+                <option value="">Choose Network</option>
+                {% for network in networks %}
+                    {% if network_id == network.id %}
+                        <option selected value="{{network.id}}">{{ network.name }}</option>
+                    {% else %}
+                        <option value="{{network.id}}">{{ network.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4 mb-5">
+            <select name="connector" class="form-select" aria-label="Select Connectors" onchange="">
+                <option value="">Choose Connector</option>
+                {% for connector in connectors %}
+                    {% if connector_id == connector.id %}
+                        <option selected value="{{connector.id}}">{{ connector.name }}</option>
+                    {% else %}
+                        <option value="{{connector.id}}">{{ connector.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4 mb-5">
+            <input name="ratio" type="integer" class="form-control" placeholder="Ratio" aria-label="Ratio" aria-describedby="basic-addon1">
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4 mb-5">
+            <input hidden name="is_submit" type="text" id="submit-text">
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4 mb-5">
+            <button type="submit" class="btn btn-primary" onclick="addSubmitInput()">Submit</button>
+        </div>
+        <div class="col-4"></div>
+    </form>
+</div>
+
+<script>
+
+    let addSubmitInput = () => {
+        elem = document.getElementById('submit-text')
+        elem.value = 'submitted'
+    }
+
+</script>
+{% endblock %}
