@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}Client List{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/partner.css' %}">
+<div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Client List</h2>
+        <a href="{% url 'client:client_create' %}" class="partner-btn partner-btn-edit">+ New Client</a>
+    </div>
+    <div class="card-body">
+        {% if client %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Client Name</th>
+                    <th>Partner</th>
+                    <th>Instance</th>
+                    <th>Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in client %}
+                <tr>
+                    <td>{{ obj.client_name }}</td>
+                    <td>{{ obj.partner}}</td>
+                    <td>{{ obj.instance.instance_name }}</td>
+                    <td>{{ obj.method }}</td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{% url 'client:client_edit' obj.pk %}" class="partner-btn partner-btn-edit">Edit</a>
+                            <a href="{% url 'client:client_delete' obj.pk %}" class="partner-btn partner-btn-delete">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2a4 4 0 004 4h2a4 4 0 004-4zm6-4a4 4 0 00-4-4V5a4 4 0 014-4h2a4 4 0 014 4v2a4 4 0 01-4 4z"/></svg>
+            No Clients found.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

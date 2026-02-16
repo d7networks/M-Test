@@ -15,6 +15,8 @@
             <li><a href="{% url 'dashboard:dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">Dashboard</a></li>
             <li><a href="{% url 'users:user_list' %}" class="{% if request.resolver_match.url_name == 'user_list' %}active{% endif %}">Users</a></li>
             <li><a href="{% url 'partner:partner_list' %}" class="{% if request.resolver_match.url_name == 'partner_list' %}active{% endif %}">Partners</a></li>
+            <li><a href="{% url 'client:client_list' %}" class="{% if request.resolver_match.url_name == 'client_list' %}active{% endif %}">Clients</a></li>
+            <li><a href="{% url 'routing:routing_list' %}" class="{% if request.resolver_match.url_name == 'routing_list' %}active{% endif %}">Routing</a></li>
         </ul>
     </aside>
     

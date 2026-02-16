@@ -1,0 +1,37 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}Routing{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header">
+        <h2>{% if form.instance.pk %}Edit Routing{% else %}Add Routing{% endif %}</h2>
+    </div>
+    <div class="card-body">
+        <form method="post" style="display: flex; flex-direction: column; gap: 1.2rem;">
+            {% csrf_token %}
+            {% for field in form %}
+                <div style="display: flex; flex-direction: column;">
+                    <label for="{{ field.id_for_label }}" style="font-weight: 500; color: #2d3748; margin-bottom: 0.3rem;">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small style="color: #718096;">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <span style="color: #e53e3e; font-size: 0.9em;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {{ form.as_p }}
+            {% endfor %}
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <button type="submit" style="background: #3182ce; color: #fff; border: none; padding: 0.7rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer;">Save</button>
+                <a href="{% url 'partner:partner_list' %}" style="background: #e2e8f0; color: #2d3748; padding: 0.39rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500;">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
