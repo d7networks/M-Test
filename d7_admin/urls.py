@@ -22,4 +22,6 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('users/', include('users.urls')),
     path('partner/', include('partner.urls')),
+    path('client/', include('client.urls')),
+    path('routing/', include('routing.urls')),
 ]

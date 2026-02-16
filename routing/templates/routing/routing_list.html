@@ -1,0 +1,50 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}Routers List{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/partner.css' %}">
+<div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Routers List</h2>
+        <a href="{% url 'routing:routing_create' %}" class="partner-btn partner-btn-edit">+ New Router</a>
+    </div>
+    <div class="card-body">
+        {% if routers %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Network</th>
+                    <th>Connector</th>
+                    <th>Percentage</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for router in routers %}
+                <tr>
+                    <td>{{ router.country }}</td>
+                    <td>{{ router.network }}</td>
+                    <td>{{ router.connector }}</td>
+                    <td>{{ router.connector_range }}</td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{% url 'routing:routing_edit' routing.pk %}" class="partner-btn partner-btn-edit">Edit</a>
+                            <a href="{% url 'routing:routing_delete' routing.pk %}" class="partner-btn partner-btn-delete">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2a4 4 0 004 4h2a4 4 0 004-4zm6-4a4 4 0 00-4-4V5a4 4 0 014-4h2a4 4 0 014 4v2a4 4 0 01-4 4z"/></svg>
+            No Routers found.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

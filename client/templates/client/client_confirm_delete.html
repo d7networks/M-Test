@@ -1,0 +1,21 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}Delete Client{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 40px auto 0 auto;">
+    <div class="card-header" style="background: #fff3f3; border-bottom: 1px solid #fed7d7;">
+        <h2 style="color: #e53e3e;">Delete Client</h2>
+    </div>
+    <div class="card-body" style="text-align: center;">
+        <svg style="width: 48px; height: 48px; margin-bottom: 1rem; color: #e53e3e;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        <p style="font-size: 1.1rem; color: #2d3748; margin-bottom: 1.5rem;">Are you sure you want to delete <strong>{{ object.user_name }}</strong>?</p>
+        <form method="post" style="display: flex; justify-content: center; gap: 1rem;">
+            {% csrf_token %}
+            <button type="submit" style="background: #e53e3e; color: #fff; border: none; padding: 0.7rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#e53e3e'">Yes, delete</button>
+            <a href="{% url 'client:client_list' %}" style="background: #e2e8f0; color: #2d3748; padding: 0.7rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500;">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
